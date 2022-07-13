@@ -51,19 +51,6 @@ find ${rats_data}/channel_{A,E,H} -name '*.wav' > data-16k/rats_channels_AEH_noi
 cat data-16k/rats_channels_AEH_noise/rats_channels_AEH_noise_file_list.txt | awk '{ split($0, arr, "/"); c=arr[7]; l=length(arr[8]); name=substr(arr[8], 0, l-4); print name " "name}' >data-16k/rats_channels_AEH_noise/utt2spk
 cat data-16k/rats_channels_AEH_noise/rats_channels_AEH_noise_file_list.txt | awk '{ split($0, arr, "/"); c=arr[7]; l=length(arr[8]); name=substr(arr[8], 0, l-4); print name " "$0}' > data-16k/rats_channels_AEH_noise/wav.scp
 
-mkdir data-16k/rats_channels_BCDFG_noise
-find ${rats_data}/channel_{B,C,D,F,G} -name '*.wav' > data-16k/rats_channels_BCDFG_noise/rats_channels_BCDFG_noise_file_list.txt
-cat data-16k/rats_channels_BCDFG_noise/rats_channels_BCDFG_noise_file_list.txt | awk '{ split($0, arr, "/"); c=arr[7]; l=length(arr[8]); name=substr(arr[8], 0, l-4); print name " "name}' >data-16k/rats_channels_BCDFG_noise/utt2spk
-cat data-16k/rats_channels_BCDFG_noise/rats_channels_BCDFG_noise_file_list.txt | awk '{ split($0, arr, "/"); c=arr[7]; l=length(arr[8]); name=substr(arr[8], 0, l-4); print name " "$0}' > data-16k/rats_channels_BCDFG_noise/wav.scp
-```
-#### Run add noise scripts
-Before running, you need to change ```rats_data``` variable, change to your own rats noise data path.
-
-```
-cd Add-Noise
-
-# for training data set
-bash add-noise-for-lid.sh --steps 1-2 --src-train data-16k/lre_train --noise_dir data-16k/rats_noise_channel_BCDFG
 
 # fot test set
 bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre_eval_3s --noise_dir ../data-16k/rats_noise_channel_AEH
@@ -78,10 +65,9 @@ For lre_train, will generate lre_train_5_snrs、lre_train_10_snrs、lre_train_15
 You should change this path "/home3/jicheng/source-data/lre17-16k/" to yourself path.
 ```
 save_16k_dir=/home3/jicheng/source-data/lre17-16k/
-for x in lre_train_5srns lre_train_10srns lre_train_15srns lre_train_20srns 
-        lre17_eval_3s_5_snrs lre17_eval_3s_10_snrs lre17_eval_3s_15_snrs lre17_eval_3s_20_snrs 
-        lre17_eval_10s_5_snrs lre17_eval_10s_10_snrs lre17_eval_10s_15_snrs lre17_eval_10s_20_snrs 
-        lre17_eval_30s_5_snrs lre17_eval_30s_10_snrs lre17_eval_30s_15_snrs lre17_eval_30s_20_snrs; do
+for x in lre17_eval_3s_5_snrs lre17_eval_3s_10_snrs lre17_eval_3s_15_snrs lre17_eval_3s_20_snrs 
+         lre17_eval_10s_5_snrs lre17_eval_10s_10_snrs lre17_eval_10s_15_snrs lre17_eval_10s_20_snrs 
+         lre17_eval_30s_5_snrs lre17_eval_30s_10_snrs lre17_eval_30s_15_snrs lre17_eval_30s_20_snrs; do
   cat data-16k/$x/wav.scp | 
     awk -v n=$x -v p=$save_16k_dir '{l = length($0); a = substr($0, 0,length-3); print $2" "$3" "$4" "$5" "$6" "$7 " " p "/" n "/" $1 ".wav"}' > data-16k/$x/${x}.cmd
     bash generate_new_wav_cmd.sh $x/$x.cmd
