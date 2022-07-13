@@ -35,15 +35,15 @@ for x in lre_train lre17_eval_3s lre17_eval_10s lre17_eval_30s;do
 done
 ```
 
-### Add Noise
+### Add noise to the test set 
 In order to test the performance of the system under noisy background, all data sets are denoised.<br>
-Different channels of rats data set are used as noise, in which channel A,E,H is used as noise data of test set, B,C,D,F,G channel is used as noise of training set.
+Different channels of rats data set are used as noise, in which channel A,E,H is used as noise data of test set.
 
 At the same time, different SNR (5, 10, 15, 20) are used for noise addition.<br>
 The smaller the SNR, the greater the noise.<br>
 
 #### Organize noise data sets
-The noise data sets used to add noise to the training set and the test set are sorted out respectively.
+The noise data sets used to add noise to the test set.
 ```
 rats_data=/home3/andrew219/python_scripts/extract_rats_noise/rats_channels/
 mkdir data-16k/rats_channels_AEH_noise
@@ -58,7 +58,6 @@ bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre_eval_10s --noise
 bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre_eval_30s --noise_dir ../data-16k/rats_noise_channel_AEH
 ```
 After run "add-noise-for-lid.sh" script, Each folder generates four additional folders.<br>
-For lre_train, will generate lre_train_5_snrs、lre_train_10_snrs、lre_train_15_snrs、lre_train_20_snrs
 
 ### Generate new wav file for noise data
 
@@ -82,17 +81,6 @@ for x in lre17_eval_3s lre17_eval_10s lre17_eval_30s;do
     done
 done
 
-for x in lre17_train;do
-    for y in 5 10 15 20;do
-        path=${save_16k_dir}/${x}_${y}_snrs/
-        snrs=_${y}_snrs
-        rm data-16k/${x}_${y}_snrs/{reco2dur,spk2utt,utt2uniq,wav.scp}
-        cat data-16k/${x}_${y}_snrs/utt2lang | awk -v p=$path s=${snrs} '{l=length($1);name=substr($1,7,l);print name s" " p $1".wav"}' > data-16k/${x}_${y}_snrs/wav.scp
-        cat data-16k/${x}_${y}_snrs/utt2lang | awk -v p=$path s=${snrs} '{l=length($1);name=substr($1,7,l);print name p" " $2}' > data-16k/${x}_${y}_snrs/utt2spk
-        cp data-16k/${x}_${y}_snrs/utt2spk data-16k/${x}_${y}_snrs/utt2lang
-        utils/fix_data_dir.sh data-16k/${x}_${y}_snrs/
-    done
-done
 ```
 
 ## Training pipeline
@@ -101,7 +89,7 @@ done
 ```
 python3 process_lre_data.py
 ```
-### Training
+### Training 
 ```
 python3 train_xsa.py
 ```
