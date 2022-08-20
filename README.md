@@ -1,5 +1,10 @@
 # Transformer based Language Identification System
+## Configuration environment
 
+Open path.sh file, change MAIN_ROOT to your espnet directory,
+```
+e.g. MAIN_ROOT=/home3/jicheng/espnet
+```
 ## Data preparation
 ### Modify the path 
 The data folder contains lre_train_all, lre17_dev_3s, lre17_dev_10s, lre17_dev_30s, lre17_eval_3s, lre17_eval_10s, lre17_eval_30s  <br> 
@@ -15,18 +20,20 @@ Our proposed model aims to use the feature of wav2vec2 model, but the pretrained
 Therefore, in order to ensure the effect of pretrained model, all data are transformed into 16K(includde train, valid and test set).
 
 ```
-utils/combine_data.sh data/lre_train data/lre17_dev_3s data/lre17_dev_10s data/lre17_dev_30s data/lre_train_all
+utils/combine_data.sh data/lre17_train data/lre17_dev_3s data/lre17_dev_10s data/lre17_dev_30s data/lre17_train_all
 ## wav_scp: The wav.scp file of the dataset you want to upsample
 ## temp_dir: Temporary folders
 ## save_16k_dir: Save address of wav file after downsampling
 
+. ./path.sh
+
 python3 upsampling_16k.py wav_scp temp_dir save_16k_dir
 
 egs:
-python3 upsampling_16k.py data/lre17_train/wav.scp /home3/jicheng/source-data/temp/ /home3/jicheng/source-data/lre17-16k/lre_train
-python3 upsampling_16k.py data/lre17_eval_3s/wav.scp /home3/jicheng/source-data/temp/ /home3/jicheng/source-data/lre17-16k/lre17_eval_3s
-python3 upsampling_16k.py data/lre17_eval_10s/wav.scp /home3/jicheng/source-data/temp/ /home3/jicheng/source-data/lre17-16k/lre17_eval_10s
-python3 upsampling_16k.py data/lre17_eval_30s/wav.scp /home3/jicheng/source-data/temp/ /home3/jicheng/source-data/lre17-16k/lre17_eval_30s
+python3 upsampling_16k.py data/lre17_train/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre_train
+python3 upsampling_16k.py data/lre17_eval_3s/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre17_eval_3s
+python3 upsampling_16k.py data/lre17_eval_10s/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre17_eval_10s
+python3 upsampling_16k.py data/lre17_eval_30s/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre17_eval_30s
 ```
 
 
