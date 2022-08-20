@@ -30,7 +30,7 @@ utils/combine_data.sh data/lre17_train data/lre17_dev_3s data/lre17_dev_10s data
 python3 upsampling_16k.py wav_scp temp_dir save_16k_dir
 
 egs:
-python3 upsampling_16k.py data/lre17_train/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre_train
+python3 upsampling_16k.py data/lre17_train/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre17_train
 python3 upsampling_16k.py data/lre17_eval_3s/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre17_eval_3s
 python3 upsampling_16k.py data/lre17_eval_10s/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre17_eval_10s
 python3 upsampling_16k.py data/lre17_eval_30s/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre17_eval_30s
@@ -42,7 +42,7 @@ You can use the following commands to prepare data, but you need to change ```sa
 ```
 save_16k_dir=/home3/jicheng/lirui/source-data/lre17-16k/
 mkdir data-16k
-for x in lre_train lre17_eval_3s lre17_eval_10s lre17_eval_30s;do
+for x in lre17_train lre17_eval_3s lre17_eval_10s lre17_eval_30s;do
   mkdir data-16k/$x
   cp data/$x/{utt2spk,spk2utt,utt2lang,wav.scp} data-16k/$x
   cat data-16k/$x/utt2spk | awk -v p=save_16k_dir '{print $1 " " p"/"$1".wav"}' > data-16k/$x/wav.scp
