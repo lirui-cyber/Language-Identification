@@ -26,5 +26,8 @@ wav_scp = sys.argv[1]
 # save temp file, will be delete after run
 save_wav = sys.argv[2]
 save_16k = sys.argv[3]
-
+if not os.path.exists(save_wav):
+    os.makedirs(save_wav)
+if not os.path.exists(save_16k):
+    os.makedirs(save_16k)
 upsampling_lre(wav_scp, save_wav, save_16k)
