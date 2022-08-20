@@ -20,6 +20,7 @@ Our proposed model aims to use the feature of wav2vec2 model, but the pretrained
 Therefore, in order to ensure the effect of pretrained model, all data are transformed into 16K(includde train, valid and test set).
 
 ```
+# lre17_train is already included in the data, this step can be ignored
 utils/combine_data.sh data/lre17_train data/lre17_dev_3s data/lre17_dev_10s data/lre17_dev_30s data/lre17_train_all
 ## wav_scp: The wav.scp file of the dataset you want to upsample
 ## temp_dir: Temporary folders
