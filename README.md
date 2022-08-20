@@ -1,13 +1,15 @@
 # Transformer based Language Identification System
-# Data preparation scripts and training pipeline for Language Identification
 
 ## Data preparation
 ### Modify the path 
-The data folder contains lre_train_all, lre17_dev_3s, lre17_dev_10s, lre17_dev_30s, lre17_eval_3s, lre17_eval_10s, lre17_eval_30s
+The data folder contains lre_train_all, lre17_dev_3s, lre17_dev_10s, lre17_dev_30s, lre17_eval_3s, lre17_eval_10s, lre17_eval_30s  <br> 
 You can use the ```sed``` command to replace the path in the wav.scp file with your path
 ```
 egs:
-Original path: 
+Original path: /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
+Your path: /data/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
+sed -i "s#/data/users/ellenrao/NIST_LRE_Corpus/#/data/#g" data/lre_train_all/wav.scp
+```
 ### upsampling to 16k
 Our proposed model aims to use the feature of wav2vec2 model, but the pretrained XLSR-53 wav2vec2 model is trained with 16K data. <br>
 Therefore, in order to ensure the effect of pretrained model, all data are transformed into 16K(includde train, valid and test set).
@@ -21,7 +23,7 @@ utils/combine_data.sh data/lre_train data/lre17_dev_3s data/lre17_dev_10s data/l
 python3 upsampling_16k.py wav_scp temp_dir save_16k_dir
 
 egs:
-python3 upsampling_16k.py data/lre17_train_all/wav.scp /home3/jicheng/source-data/temp/ /home3/jicheng/source-data/lre17-16k/lre_train
+python3 upsampling_16k.py data/lre17_train/wav.scp /home3/jicheng/source-data/temp/ /home3/jicheng/source-data/lre17-16k/lre_train
 python3 upsampling_16k.py data/lre17_eval_3s/wav.scp /home3/jicheng/source-data/temp/ /home3/jicheng/source-data/lre17-16k/lre17_eval_3s
 python3 upsampling_16k.py data/lre17_eval_10s/wav.scp /home3/jicheng/source-data/temp/ /home3/jicheng/source-data/lre17-16k/lre17_eval_10s
 python3 upsampling_16k.py data/lre17_eval_30s/wav.scp /home3/jicheng/source-data/temp/ /home3/jicheng/source-data/lre17-16k/lre17_eval_30s
