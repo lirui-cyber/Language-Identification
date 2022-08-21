@@ -103,6 +103,13 @@ fi
 if [ -f $srcdir/utt2dur ]; then
   utils/apply_map.pl -f 1 $destdir/utt_map <$srcdir/utt2dur >$destdir/utt2dur
 fi
+if [ -f $srcdir/utt2label ]; then
+  utils/apply_map.pl -f 1 $destdir/utt_map <$srcdir/utt2label >$destdir/utt2label
+fi
+if [ -f $srcdir/utt2lang ]; then
+  utils/apply_map.pl -f 1 $destdir/utt_map <$srcdir/utt2lang >$destdir/utt2lang
+fi
+
 if [ -f $srcdir/reco2dur ]; then
   if [ -f $srcdir/segments ]; then
     cp $srcdir/reco2dur $destdir/reco2dur
