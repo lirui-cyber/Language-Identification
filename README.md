@@ -49,6 +49,7 @@ bash generate_noise_wav.sh --dump /home3/jicheng/lirui/Language-Identification/d
 ```
 
 ## Training pipeline
+Before execution, please check the parameters in ```xsa_config``` <br>
 ### Extracting wav2vec2 features
 
 ```
