@@ -8,8 +8,9 @@ e.g. MAIN_ROOT=/home3/jicheng/espnet
 ## Data preparation
 ### Modify the path 
 The data folder contains:<br>
-- Training set: lre_train [lre17_train_all + lre17_dev_3s + lre17_dev_10s + lre17_dev_30s]
-- Test sets: lre17_eval_3s lre17_eval_10s lre17_eval_30s<br>
+- **Training set**: lre_train [lre17_train_all + lre17_dev_3s + lre17_dev_10s + lre17_dev_30s]
+- **Test sets**: lre17_eval_3s lre17_eval_10s lre17_eval_30s<br>
+- **Noise Rats data**: rats_noise_channel_AEH  rats_noise_channel_BCDFG<br>
 You can use the ```sed``` command to replace the path in the wav.scp file with your path
 ```
 egs:
@@ -36,19 +37,11 @@ At the same time, different SNR (5, 10, 15, 20) are used for noise addition.<br>
 The smaller the SNR, the greater the noise.<br>
 
 #### Organize noise data sets
-The noise data sets used to add noise to the test set.
 ```
-rats_data=/home3/andrew219/python_scripts/extract_rats_noise/rats_channels/
-mkdir data-16k/rats_channels_AEH_noise
-find ${rats_data}/channel_{A,E,H} -name '*.wav' > data-16k/rats_channels_AEH_noise/rats_channels_AEH_noise_file_list.txt
-cat data-16k/rats_channels_AEH_noise/rats_channels_AEH_noise_file_list.txt | awk '{ split($0, arr, "/"); c=arr[7]; l=length(arr[8]); name=substr(arr[8], 0, l-4); print name " "name}' >data-16k/rats_channels_AEH_noise/utt2spk
-cat data-16k/rats_channels_AEH_noise/rats_channels_AEH_noise_file_list.txt | awk '{ split($0, arr, "/"); c=arr[7]; l=length(arr[8]); name=substr(arr[8], 0, l-4); print name " "$0}' > data-16k/rats_channels_AEH_noise/wav.scp
-
-
 # fot test set
-bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre_eval_3s --noise_dir ../data-16k/rats_noise_channel_AEH
-bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre_eval_10s --noise_dir ../data-16k/rats_noise_channel_AEH
-bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre_eval_30s --noise_dir ../data-16k/rats_noise_channel_AEH
+bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train data-16k/lre17_eval_3s --noise_dir data/rats_noise_channel_AEH
+bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train data-16k/lre17_eval_10s --noise_dir data/rats_noise_channel_AEH
+bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train data-16k/lre17_eval_30s --noise_dir data/rats_noise_channel_AEH
 ```
 After run "add-noise-for-lid.sh" script, Each folder generates four additional folders.<br>
 
