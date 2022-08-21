@@ -4,7 +4,6 @@
 
 
 . path.sh
-. cmd.sh
 
 echo
 echo "## LOG: $0 $@"
@@ -21,7 +20,7 @@ src_train=
 sampling_rate=16000
 # rate of all aug data 0<rate<1
 subset_noise_rate=1
-
+noise_dir=data/rats_noise_channel_BCDFG
 # noise
 noise_fg_interval=1
 noise_bg_snrs=20 #15:10:5:0
@@ -42,7 +41,6 @@ if [ ! -z "$steps" ]; then
 fi
 
 # add noise
-noise_dir=data/rats_noise_channel_BCDFG
 rats_data=/home3/andrew219/python_scripts/extract_rats_noise/rats_channels/
 
 if [ ! -z $step01 ]; then 
