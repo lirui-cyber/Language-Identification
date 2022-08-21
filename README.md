@@ -17,41 +17,16 @@ Original path: /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_201
 Your path: /data/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
 sed -i "s#/data/users/ellenrao/NIST_LRE_Corpus/#/data/#g" data/lre_train/wav.scp
 ```
-### Upsampling to 16k
+### Prepare kaldi format file
 Our proposed model aims to use the feature of wav2vec2 model, but the pretrained XLSR-53 wav2vec2 model is trained with 16K data. <br>
-Therefore, in order to ensure the effect of pretrained model, all data are transformed into 16K(includde train, valid and test set).
-
+Therefore, the aim of this step is to <br>
+- Generating real audio from segments (generation of segments files is mentioned in D1 x-vector)
+- Upsampling to 16k 
 ```
-# lre17_train is already included in the data, this step can be ignored
-utils/combine_data.sh data/lre17_train data/lre17_dev_3s data/lre17_dev_10s data/lre17_dev_30s data/lre17_train_all
-## wav_scp: The wav.scp file of the dataset you want to upsample
-## temp_dir: Temporary folders
-## save_16k_dir: Save address of wav file after downsampling
-
-. ./path.sh
-
-python3 upsampling_16k.py wav_scp temp_dir save_16k_dir
-
-egs:
-python3 upsampling_16k.py data/lre17_train/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre17_train
-python3 upsampling_16k.py data/lre17_eval_3s/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre17_eval_3s
-python3 upsampling_16k.py data/lre17_eval_10s/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre17_eval_10s
-python3 upsampling_16k.py data/lre17_eval_30s/wav.scp /home3/jicheng/lirui/source-data/temp/ /home3/jicheng/lirui/source-data/lre17-16k/lre17_eval_30s
+# dump: new storage path
+bash generate_segments_wav.sh --dump /home3/jicheng/lirui/Language-Identification/data-16k
 ```
 
-
-### Prepare new kaldi format file
-You can use the following commands to prepare data, but you need to change ```save_16k_dir``` variable.
-```
-save_16k_dir=/home3/jicheng/lirui/source-data/lre17-16k/
-mkdir data-16k
-for x in lre17_train lre17_eval_3s lre17_eval_10s lre17_eval_30s;do
-  mkdir data-16k/$x
-  cp data/$x/{utt2spk,spk2utt,utt2lang,wav.scp} data-16k/$x
-  cat data-16k/$x/utt2spk | awk -v p=save_16k_dir '{print $1 " " p"/"$1".wav"}' > data-16k/$x/wav.scp
-  utils/fix_data_dir.sh data-16k/$x
-done
-```
 
 ### Add noise to the test set 
 In order to test the performance of the system under noisy background, all data sets are denoised.<br>
