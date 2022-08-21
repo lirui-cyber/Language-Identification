@@ -7,7 +7,9 @@ e.g. MAIN_ROOT=/home3/jicheng/espnet
 ```
 ## Data preparation
 ### Modify the path 
-The data folder contains lre_train_all, lre17_dev_3s, lre17_dev_10s, lre17_dev_30s, lre17_eval_3s, lre17_eval_10s, lre17_eval_30s  <br> 
+The data folder contains:<br>
+- Training set: lre_train [lre17_train_all + lre17_dev_3s + lre17_dev_10s + lre17_dev_30s]
+- Test sets: lre17_eval_3s lre17_eval_10s lre17_eval_30s
 You can use the ```sed``` command to replace the path in the wav.scp file with your path
 ```
 egs:
