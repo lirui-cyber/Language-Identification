@@ -59,9 +59,9 @@ if [ ! -z $step01 ]; then
   done
 fi
 
-#if [ ! -f $src_train/reco2dur ]; then
-#    utils/data/get_reco2dur.sh --nj $nj  --cmd "$cmd" $src_train || exit 1;
-#fi
+if [ ! -f $src_train/reco2dur ]; then
+    utils/data/get_reco2dur.sh --nj $nj  --cmd "$cmd" $src_train || exit 1;
+fi
 #if [ ! -f $noise_dir/reco2dur ]; then
 #    utils/data/get_reco2dur.sh --nj $nj  --cmd "$cmd" $noise_dir || exit 1;
 #fi
