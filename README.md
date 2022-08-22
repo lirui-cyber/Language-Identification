@@ -37,12 +37,12 @@ python upsampling_16k.py data/lre17_eval_30s/wav.scp source-data/temp/ source-da
 ```
 ### Prepare new kaldi format file
 ```
-save_16k_dir=source-data/lre17-16k/
+save_16k_dir=source-data/lre17-16k
 mkdir data-16k
 for x in lre17_train lre17_eval_3s lre17_eval_10s lre17_eval_30s;do
   mkdir data-16k/$x
   cp data/$x/{utt2spk,spk2utt,utt2lang,wav.scp} data-16k/$x
-  cat data-16k/$x/utt2spk | awk -v p=save_16k_dir '{print $1 " " p"/"$1".wav"}' > data-16k/$x/wav.scp
+  cat data-16k/$x/utt2spk | awk -v p=`pwd`/$save_16k_dir '{print $1 " " p"/"$1".wav"}' > data-16k/$x/wav.scp
   utils/fix_data_dir.sh data-16k/$x
 done
 ```
