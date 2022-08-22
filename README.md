@@ -41,8 +41,8 @@ save_16k_dir=source-data/lre17-16k
 mkdir data-16k
 for x in lre17_train lre17_eval_3s lre17_eval_10s lre17_eval_30s;do
   mkdir data-16k/$x
-  cp data/$x/{utt2spk,spk2utt,utt2lang,wav.scp} data-16k/$x
-  cat data-16k/$x/utt2spk | awk -v p=`pwd`/$save_16k_dir '{print $1 " " p"/"$1".wav"}' > data-16k/$x/wav.scp
+  cp data/$x/{reco2dur,utt2spk,spk2utt,utt2lang,wav.scp} data-16k/$x
+  cat data-16k/$x/utt2spk | awk -v p=`pwd`/$save_16k_dir/$x '{print $1 " " p"/"$1".wav"}' > data-16k/$x/wav.scp
   utils/fix_data_dir.sh data-16k/$x
 done
 ```
@@ -57,12 +57,14 @@ The smaller the SNR, the greater the noise.<br>
 ### Run add noise scripts
 ```
 # for training data set
-bash Add-Noise/add-noise-for-lid.sh --steps 1-2 --src-train data-16k/lre17_train --noise_dir data/rats_noise_channel_BCDFG
+cd Add-Noise
+
+bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_train --noise_dir ../data/rats_noise_channel_BCDFG
 
 # fot test set
-bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train data-16k/lre17_eval_3s --noise_dir data/rats_noise_channel_AEH
-bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train data-16k/lre17_eval_10s --noise_dir data/rats_noise_channel_AEH
-bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train data-16k/lre17_eval_30s --noise_dir data/rats_noise_channel_AEH
+bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_3s --noise_dir ../data/rats_noise_channel_AEH
+bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_10s --noise_dir ../data/rats_noise_channel_AEH
+bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_30s --noise_dir ../data/rats_noise_channel_AEH
 ```
 After run "add-noise-for-lid.sh" script, Each folder generates four additional folders.<br>
 For lre_train, will generate lre_train_5_snrs、lre_train_10_snrs、lre_train_15_snrs、lre_train_20_snrs
