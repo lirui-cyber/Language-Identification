@@ -62,9 +62,9 @@ cd Add-Noise
 bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_train --noise_dir ../data/rats_noise_channel_BCDFG
 
 # fot test set
-bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_3s --noise_dir ../data/rats_noise_channel_AEH
-bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_10s --noise_dir ../data/rats_noise_channel_AEH
-bash Add-Noise/add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_30s --noise_dir ../data/rats_noise_channel_AEH
+bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_3s --noise_dir ../data/rats_noise_channel_AEH
+bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_10s --noise_dir ../data/rats_noise_channel_AEH
+bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_30s --noise_dir ../data/rats_noise_channel_AEH
 ```
 After run "add-noise-for-lid.sh" script, Each folder generates four additional folders.<br>
 For lre_train, will generate lre_train_5_snrs、lre_train_10_snrs、lre_train_15_snrs、lre_train_20_snrs
