@@ -1,9 +1,14 @@
 # Transformer based Language Identification System
-## Configuration environment
-
-Open path.sh file, change MAIN_ROOT to your espnet directory,
+## Installation:
+1. sph2pipe
 ```
-e.g. MAIN_ROOT=/home3/jicheng/espnet
+cd sph2pipe_v2.5
+gcc -o sph2pipe *.c -lm
+
+# Add the sph2pipe to the user environment variables
+vim ~/.bashrc
+export PATH=/home3/jicheng/sph2pipe_v2.5:$PATH
+source ~/.bashrc
 ```
 ## Data preparation
 ### Modify the path 
@@ -17,6 +22,16 @@ egs:
 Original path: /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
 Your path: /data/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
 sed -i "s#/data/users/ellenrao/NIST_LRE_Corpus/#/data/#g" data/lre_train/wav.scp
+```
+### Processing training data
+It is to generate each segment as new 16kHz wavefile, which name is the same as the uttID(1st column) of utt2spk
+```
+python generate_new_wav_cmd.py data/lre17_train/wav.scp data/lre17_train/segments source-data/lre17-16k/lre17_train
+```
+### Processing test data
+Because the test set does not hava segment, only upsampling is required
+```
+
 ```
 ### Prepare kaldi format file
 Our proposed model aims to use the feature of wav2vec2 model, but the pretrained XLSR-53 wav2vec2 model is trained with 16K data. <br>
