@@ -3,7 +3,8 @@
 # updata by Zhang Jicheng
 
 
-. path.sh
+#path.sh
+#cmd.sh
 
 echo
 echo "## LOG: $0 $@"
@@ -20,13 +21,15 @@ src_train=
 sampling_rate=16000
 # rate of all aug data 0<rate<1
 subset_noise_rate=1
-noise_dir=data/rats_noise_channel_BCDFG
+
 # noise
+noise_dir=data/rats_noise_channel_BCDFG
+
 noise_fg_interval=1
 noise_bg_snrs=20 #15:10:5:0
 # end option
 
-. parse_options.sh || exit 1
+. ./utils/parse_options.sh || exit 1
 
 steps=$(echo $steps | perl -e '$steps=<STDIN>;  $has_format = 0;
   if($steps =~ m:(\d+)\-$:g){$start = $1; $end = $start + 10; $has_format ++;}
@@ -56,12 +59,12 @@ if [ ! -z $step01 ]; then
   done
 fi
 
-if [ ! -f $src_train/reco2dur ]; then
-    utils/data/get_reco2dur.sh --nj $nj  --cmd "$cmd" $src_train || exit 1;
-fi
-if [ ! -f $noise_dir/reco2dur ]; then
-    utils/data/get_reco2dur.sh --nj $nj  --cmd "$cmd" $noise_dir || exit 1;
-fi
+#if [ ! -f $src_train/reco2dur ]; then
+#    utils/data/get_reco2dur.sh --nj $nj  --cmd "$cmd" $src_train || exit 1;
+#fi
+#if [ ! -f $noise_dir/reco2dur ]; then
+#    utils/data/get_reco2dur.sh --nj $nj  --cmd "$cmd" $noise_dir || exit 1;
+#fi
 
 if [ ! -z $step02 ]; then
   for noise_bg_snrs in 5 10 15 20;do
