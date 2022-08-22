@@ -25,8 +25,7 @@ def generateNewWavFile(wav, segment, path):
     oldName = line[1]
     start = float(line[2])
     end = float(line[3])
-    cmd = wavDict[oldName] + " sox -t wav - -t wav -r 16000 " + path + "/" + newName + ".wav trim " + str(start) + " " + str(end - start)
-    #cmd = " sox -t wav " + wavDict[oldName] + " -t wav -r 16000 " + path + "/" + newName + ".wav trim " + str(start) + " " + str(end - start)
+    cmd = " sox -t wav " + wavDict[oldName] + " -t wav -r 16000 " + path + "/" + newName + ".wav trim " + str(start) + " " + str(end - start)
     print(cmd)
     #os.system("bash -c " + cmd)
     subprocess.call(cmd, shell=True) 
@@ -38,6 +37,6 @@ wav = sys.argv[1]
 segment  = sys.argv[2]
 path = sys.argv[3]
 if not os.path.exists(path):
-    os.mkdir(path)
+    os.makedirs(path)
 generateNewWavFile(wav, segment, path)
 
