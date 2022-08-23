@@ -107,7 +107,8 @@ done
 ## Training pipeline
 Before execution, please check the parameters in ```xsa_config``` <br>
 ### Extracting wav2vec2 features
-
+This script requires the following dependency packages: <br>
+numpy, scikit-learn, torch, librosa, kaldiio, s3prl
 ```
 python3 process_lre_data.py
 ```
