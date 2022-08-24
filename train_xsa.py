@@ -81,6 +81,9 @@ def main():
                                   max_seq_len=10000)
 
     model.to(device)
+    exp = config_proj["exp"]
+    if not os.path.exists(exp):
+        os.mkdir(exp)
     model_name = config_proj["model_name"]
     log_dir = config_proj["Input"]["userroot"] + config_proj["Input"]["log"]
     kaldi_root = config_proj["kaldi"]
