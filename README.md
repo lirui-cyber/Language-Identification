@@ -37,7 +37,7 @@ python upsampling_16k.py data/lre17_eval_10s/wav.scp source-data/temp/ source-da
 python upsampling_16k.py data/lre17_eval_30s/wav.scp source-data/temp/ source-data/lre17-16k/lre17_eval_30s
 ```
 ### Prepare new kaldi format file
-New kaldi format file are stored in ```data-16k```
+New kaldi format file are stored in ```data-16k```, and it is better not to change this parameter.
 ```
 bash prepare_new_kaldi_format.sh --save_16k_dir source-data/lre17-16k --data data-16k
 ```
@@ -50,11 +50,12 @@ At the same time, different SNR (5, 10, 15, 20) are used for noise addition.<br>
 The smaller the SNR, the greater the noise.<br>
 
 ### Run add noise scripts
+Before running, please make sure you have changed the path of data/{rats_noise_channel_BCDFG,rats_noise_channel_AEH}/wav.scp to the path of your own rats data
 ```
 # for training data set
 cd Add-Noise
 
-bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_train --noise_dir ../data/rats_noise_channel_BCDFG
+bash add-noise-for-lid.sh --steps 1-2 --src-train ../data-16k/lre17_train --noise_dir ../data/rats_noise_channel_BCDFG
 
 # fot test set
 bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_3s --noise_dir ../data/rats_noise_channel_AEH
