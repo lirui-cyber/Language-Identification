@@ -80,6 +80,21 @@ You need to change two parameters:<br>
 - **userroot**: Project root 
 - **model_path**: The path of pretrained-model xlsr_53_56k.pt. <br>
 You can download the model from this link below:  https://dl.fbaipublicfiles.com/fairseq/wav2vec/xlsr_53_56k.pt <br>
+### Set up Conda environment
+```
+conda create -n xsa python=3.8 numpy pandas
+conda activate xsa
+```
+- install pytorch
+```
+conda install pytorch=1.11.0 torchvision torchaudio cudatoolkit=11.3 -c pytorch
+```
+- install librosa, kaldiio
+```
+pip install librosa
+pip install kaldiio 
+```
+
 ### Extracting wav2vec2 features
 This script requires the following dependency packages: <br>
 - numpy

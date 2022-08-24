@@ -41,5 +41,5 @@
     "_comment": "warmup_step = -1 denotes default value, num_work is better to be your_cpu_cores/4"
   },
   "kaldi": "/home/maison2/kaldi/",
-  "check_point": "exp/xsa_10.ckpt"
+  "check_point": "exp/xsa_9.ckpt"
 }
