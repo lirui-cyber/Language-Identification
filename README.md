@@ -11,11 +11,11 @@ export PATH=/home3/jicheng/sph2pipe_v2.5:$PATH
 source ~/.bashrc
 ```
 ## Data preparation
-### Modify the path 
 The data folder contains:<br>
 - **Training set**: lre17_train [ lre17_train_all + lre17_dev_3s + lre17_dev_10s + lre17_dev_30s ]
 - **Test sets**: lre17_eval_3s, lre17_eval_10s, lre17_eval_30s<br>
-- **Noise Rats data**: rats_noise_channel_AEH,  rats_noise_channel_BCDFG<br><br>
+- **Noise Rats data**: rats_noise_channel_AEH,  rats_noise_channel_BCDFG
+### Modify the path 
 You can use the ```sed``` command to replace the path in the wav.scp file with your path <br>
 You only need to change the path of lre17_train, lre17_eval_3s, lre17_eval_10s, lre17_eval_30s to LRE data and rats_noise_channel_AEH, rats_noise_channel_BCDFG to RATS data
 ```
