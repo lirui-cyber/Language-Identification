@@ -36,10 +36,10 @@
     "device": 0,
     "DDP": "False",
     "warmup_step": -1,
-    "valid_epochs": 3,
+    "valid_epochs": 0,
     "seed": -1,
     "_comment": "warmup_step = -1 denotes default value, num_work is better to be your_cpu_cores/4"
   },
   "kaldi": "/home/maison2/kaldi/",
-  "check_point": "exp/xsa_35.ckpt"
+  "check_point": "exp/xsa_10.ckpt"
 }
