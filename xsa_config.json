@@ -9,7 +9,7 @@
     "_comment": "FOr language recognition, XLSR-53 is recommended as the feature extractor"
   },
   "Input": {
-    "userroot": "/home3/jicheng/w2021/Language-Identification/",
+    "userroot": "/home3/jicheng/Language-Identification/",
     "train_set": "data-16k/lre17_train",
     "valid_set": "none",
     "test_sets": "data-16k/lre17_eval_3s data-16k/lre17_eval_10s data-16k/lre17_eval_30s  data-16k/lre17_eval_3s_5_snrs data-16k/lre17_eval_3s_10_snrs data-16k/lre17_eval_3s_15_snrs data-16k/lre17_eval_3s_20_snrs data-16k/lre17_eval_10s_5_snrs data-16k/lre17_eval_10s_10_snrs data-16k/lre17_eval_10s_15_snrs data-16k/lre17_eval_10s_20_snrs data-16k/lre17_eval_30s_5_snrs data-16k/lre17_eval_30s_10_snrs data-16k/lre17_eval_30s_15_snrs data-16k/lre17_eval_30s_20_snrs",
@@ -28,7 +28,7 @@
   },
   "optim_config": {
     "learning_rate": 0.0001,
-    "epochs": 35,
+    "epochs": 10,
     "batch": 128,
     "optimizer": "Adam",
     "scheduler": "warmup_cosine",
