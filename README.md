@@ -37,8 +37,9 @@ python upsampling_16k.py data/lre17_eval_10s/wav.scp source-data/temp/ source-da
 python upsampling_16k.py data/lre17_eval_30s/wav.scp source-data/temp/ source-data/lre17-16k/lre17_eval_30s
 ```
 ### Prepare new kaldi format file
+New kaldi format file are stored in ```data-16k```
 ```
-bash prepare_new_kaldi_format.sh
+bash prepare_new_kaldi_format.sh --save_16k_dir source-data/lre17-16k --data data-16k
 ```
 
 ## Add Noise
