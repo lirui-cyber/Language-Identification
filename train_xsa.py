@@ -155,7 +155,7 @@ def main():
         torch.save(model.state_dict(), name)
 
             # print(get_lr(optimizer))
-        if epoch >= total_epochs - valid_epochs -1:
+        if epoch >= total_epochs - valid_epochs:
         # if epoch >= total_epochs - valid_epochs -1 or epoch == 10:
             if valid_txt is not None:
                 valid_feats = config_proj["Input"]["userroot"] + config_proj["Input"]["valid_set"] +  "/wav2vec_" + config_proj["wav2vec_info"]["model_name"] + "_" + str(feat_layer) + "_layer/feats.scp"
