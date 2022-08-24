@@ -15,8 +15,9 @@ source ~/.bashrc
 The data folder contains:<br>
 - **Training set**: lre17_train [ lre17_train_all + lre17_dev_3s + lre17_dev_10s + lre17_dev_30s ]
 - **Test sets**: lre17_eval_3s, lre17_eval_10s, lre17_eval_30s<br>
-- **Noise Rats data**: rats_noise_channel_AEH,  rats_noise_channel_BCDFG<br>
-You can use the ```sed``` command to replace the path in the wav.scp file with your path
+- **Noise Rats data**: rats_noise_channel_AEH,  rats_noise_channel_BCDFG<br><br>
+You can use the ```sed``` command to replace the path in the wav.scp file with your path <br>
+You only need to change the path of lre17_train, lre17_eval_3s, lre17_eval_10s, lre17_eval_30s to LRE data and rats_noise_channel_AEH, rats_noise_channel_BCDFG to RATS data
 ```
 egs:
 Original path: /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
@@ -72,8 +73,8 @@ bash generate_wav.sh  --save_16k_dir source-data/lre17-16k --data data-16k
 ## Training pipeline
 Before execution, please check the parameters in ```xsa_config``` <br>
 You need to change two parameters:<br>
-**userroot**: Project root <br>
-**model_path**: The path of pretrained-model xlsr_53_56k.pt. <br>
+- **userroot**: Project root 
+- **model_path**: The path of pretrained-model xlsr_53_56k.pt. <br>
 You can download the model from this link below:  https://dl.fbaipublicfiles.com/fairseq/wav2vec/xlsr_53_56k.pt <br>
 ### Extracting wav2vec2 features
 This script requires the following dependency packages: <br>
@@ -82,8 +83,7 @@ This script requires the following dependency packages: <br>
 - torch
 - librosa 
 - kaldiio 
-- s3prl <br>
-The pretrain model: ```pretrained-model/xlsr_53_56k.pt``` <br>
+- s3prl
 ```
 python3 process_lre_data.py
 ```
