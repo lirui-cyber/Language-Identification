@@ -33,9 +33,7 @@ python generate_new_wav_cmd.py data/lre17_train/wav.scp data/lre17_train/segment
 ### Processing test data
 Because the test set does not hava segment, only upsampling is required
 ```
-python upsampling_16k.py data/lre17_eval_3s/wav.scp source-data/temp/ source-data/lre17-16k/lre17_eval_3s
-python upsampling_16k.py data/lre17_eval_10s/wav.scp source-data/temp/ source-data/lre17-16k/lre17_eval_10s
-python upsampling_16k.py data/lre17_eval_30s/wav.scp source-data/temp/ source-data/lre17-16k/lre17_eval_30s
+bash upsampling.sh  --save_16k_dir source-data/lre17-16k
 ```
 ### Prepare new kaldi format file
 New kaldi format file are stored in ```data-16k```, and it is better not to change this parameter.
@@ -54,6 +52,7 @@ The smaller the SNR, the greater the noise.<br>
 Before running, please make sure you have changed the path of data/{rats_noise_channel_BCDFG,rats_noise_channel_AEH}/wav.scp to the path of your own rats data
 ```
 # for training data set
+
 cd Add-Noise
 
 bash add-noise-for-lid.sh --steps 1-2 --src-train ../data-16k/lre17_train --noise_dir ../data/rats_noise_channel_BCDFG
