@@ -24,7 +24,8 @@ Your path: /data/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluat
 sed -i "s#/data/users/ellenrao/NIST_LRE_Corpus/#/data/#g" data/lre_train/wav.scp
 ```
 ### Processing training data
-It is to generate each segment as new 16kHz wavefile, which name is the same as the uttID(1st column) of utt2spk
+It is to generate each segment as new 16kHz wavefile, which name is the same as the uttID(1st column) of utt2spk <br>
+```source-data``` is the folder where the audio is stored.
 ```
 python generate_new_wav_cmd.py data/lre17_train/wav.scp data/lre17_train/segments source-data/lre17-16k/lre17_train
 ```
@@ -37,14 +38,7 @@ python upsampling_16k.py data/lre17_eval_30s/wav.scp source-data/temp/ source-da
 ```
 ### Prepare new kaldi format file
 ```
-save_16k_dir=source-data/lre17-16k
-mkdir data-16k
-for x in lre17_train lre17_eval_3s lre17_eval_10s lre17_eval_30s;do
-  mkdir data-16k/$x
-  cp data/$x/{reco2dur,utt2spk,spk2utt,utt2lang,wav.scp} data-16k/$x
-  cat data-16k/$x/utt2spk | awk -v p=`pwd`/$save_16k_dir/$x '{print $1 " " p"/"$1".wav"}' > data-16k/$x/wav.scp
-  utils/fix_data_dir.sh data-16k/$x
-done
+bash prepare_new_kaldi_format.sh
 ```
 
 ## Add Noise
