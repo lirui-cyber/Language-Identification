@@ -4,7 +4,7 @@ save_16k_dir=
 data=
 . ./utils/parse_options.sh
 save_dir=`pwd`/${save_16k_dir}
-for x in lre17_train_5srns lre17_train_10srns lre17_train_15srns lre17_train_20srns lre17_eval_3s_5_snrs lre17_eval_3s_10_snrs lre17_eval_3s_15_snrs lre17_eval_3s_20_snrs lre17_eval_10s_5_snrs lre17_eval_10s_10_snrs lre17_eval_10s_15_snrs lre17_eval_10s_20_snrs lre17_eval_30s_5_snrs lre17_eval_30s_10_snrs lre17_eval_30s_15_snrs lre17_eval_30s_20_snrs; do
+for x in lre17_train_5_srns lre17_train_10_srns lre17_train_15_srns lre17_train_20_srns lre17_eval_3s_5_snrs lre17_eval_3s_10_snrs lre17_eval_3s_15_snrs lre17_eval_3s_20_snrs lre17_eval_10s_5_snrs lre17_eval_10s_10_snrs lre17_eval_10s_15_snrs lre17_eval_10s_20_snrs lre17_eval_30s_5_snrs lre17_eval_30s_10_snrs lre17_eval_30s_15_snrs lre17_eval_30s_20_snrs; do
   mkdir ${save_dir}/$x 
   cat ${data}/$x/wav.scp | awk -v n=$x -v p=${save_dir} '{l = length($0); a = substr($0, 0,length-3); print $2" "$3" "$4" "$5" "$6" "$7 " " p "/" n "/" $1 ".wav"}' > ${data}/$x/${x}.cmd
     bash generate_new_wav_cmd.sh ${data}/$x/$x.cmd
