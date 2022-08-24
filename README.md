@@ -71,6 +71,10 @@ bash generate_wav.sh  --save_16k_dir source-data/lre17-16k --data data-16k
 ```
 ## Training pipeline
 Before execution, please check the parameters in ```xsa_config``` <br>
+You need to change two parameters:<br>
+**userroot**: Project root <br>
+**model_path**: The path of pretrained-model xlsr_53_56k.pt. <br>
+You can download the model from this link below:  https://dl.fbaipublicfiles.com/fairseq/wav2vec/xlsr_53_56k.pt <br>
 ### Extracting wav2vec2 features
 This script requires the following dependency packages: <br>
 - numpy
@@ -78,7 +82,7 @@ This script requires the following dependency packages: <br>
 - torch
 - librosa 
 - kaldiio 
-- s3prl
+- s3prl <br>
 The pretrain model: ```pretrained-model/xlsr_53_56k.pt``` <br>
 ```
 python3 process_lre_data.py
