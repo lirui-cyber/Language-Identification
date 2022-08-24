@@ -55,7 +55,7 @@ Before running, please make sure you have changed the path of data/{rats_noise_c
 
 cd Add-Noise
 
-bash add-noise-for-lid.sh --steps 1-2 --src-train ../data-16k/lre17_train --noise_dir ../data/rats_noise_channel_BCDFG
+bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_train --noise_dir ../data/rats_noise_channel_BCDFG
 
 # fot test set
 bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_3s --noise_dir ../data/rats_noise_channel_AEH
