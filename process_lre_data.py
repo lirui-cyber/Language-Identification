@@ -146,22 +146,6 @@ def main():
     feat_extract(wav2vec2lang=train_txt, model=model, layer=feat_layer, save_dir=save_w2v_train_dir,
                  audio_list=audio_train, label_list=labels_train_index, name_list=name_list, device=device)
 
-
-    if config_proj["Input"]["valid_set"] != "none":
-        wav_scp_valid = config_proj["Input"]["userroot"] + config_proj["Input"]["valid_set"] + "/wav.scp"
-        utt2lang_valid = config_proj["Input"]["userroot"] + config_proj["Input"]["valid_set"] + "/utt2lang"
-        audio_valid, labels_valid, name_list = wav_lang_extract(wav_scp_valid, utt2lang_valid)
-        labels_valid_index = le.transform(labels_valid)
-        
-        save_w2v_valid_dir =wav_scp_valid.replace('/wav.scp', "/wav2vec_" + config_proj["wav2vec_info"]["model_name"] + "_" + str(feat_layer) + "_layer")
-        if not os.path.exists(save_w2v_valid_dir):
-            os.mkdir(save_w2v_valid_dir)
-
-        valid_txt = config_proj["Input"]["userroot"] + config_proj["Input"]["valid_set"] + "/wav2vec_" + config_proj["wav2vec_info"]["model_name"] + ".txt"
-        feat_extract(wav2vec2lang=valid_txt, model=model, layer=feat_layer, save_dir=save_w2v_valid_dir,
-                     audio_list=audio_valid, label_list=labels_valid_index, name_list=name_list, device=device)
-
-    
     test_sets = config_proj["Input"]["test_sets"].split()
     for test in test_sets:
         wav_scp_test = config_proj["Input"]["userroot"] + test + "/wav.scp"
