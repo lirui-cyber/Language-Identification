@@ -1,4 +1,9 @@
 # Transformer based Language Identification System
+## Download the project
+Clone the project from GitHub into your workspace
+```
+git clone -b simple https://github.com/lirui-cyber/Language-Identification.git
+```
 ## Installation:
 1. sph2pipe
 ```
