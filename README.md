@@ -27,7 +27,7 @@ You only need to change the path of lre17_train, lre17_eval_3s, lre17_eval_10s, 
 egs:
 Original path: /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
 Your path: /data/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
-sed -i "s#/data/users/ellenrao/NIST_LRE_Corpus/#/data/#g" data/lre_train/wav.scp
+sed -i "s#/data/users/ellenrao/NIST_LRE_Corpus/#/data/#g" data/lre17_train/wav.scp
 ```
 ### Processing training data
 It is to generate each segment as new 16kHz wavefile, which name is the same as the uttID(1st column) of utt2spk <br>
