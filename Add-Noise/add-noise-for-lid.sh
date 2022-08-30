@@ -68,7 +68,6 @@ fi
 
 if [ ! -z $step02 ]; then
   for noise_bg_snrs in 5 10 15 20;do
-    # Augment with musan_noise
     steps/data/augment_data_dir.py --utt-prefix "noise" --modify-spk-id "true" \
       --fg-interval $noise_fg_interval --fg-snrs "$noise_bg_snrs" --fg-noise-dir "$noise_dir" \
       $src_train ${src_train}_${noise_bg_snrs}_snrs || exit 1
