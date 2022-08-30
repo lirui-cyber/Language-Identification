@@ -1,6 +1,6 @@
-from model import *
-from data_load import *
-import scoring
+from model.model import *
+from model.data_load import *
+from score import scoring as scoring
 import subprocess
 import json
 
@@ -45,7 +45,7 @@ def validation(valid_txt, valid_feats, model, model_name, device, kaldi, log_dir
     scoring.get_trials(valid_txt, num_lang, trial_txt)
     scoring.get_score(valid_txt, scores, num_lang, score_txt)
     eer_txt = trial_txt.replace('trial', 'eer')
-    subprocess.call(f"bash ./computeEER.sh "
+    subprocess.call(f"bash ./score/computeEER.sh "
                     f"--write-file {eer_txt} {trial_txt} {score_txt}", shell=True)
     cavg = scoring.compute_cavg(trial_txt, score_txt)
     print("Cavg:{}".format(cavg))

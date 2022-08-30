@@ -24,8 +24,11 @@ source ~/.bashrc
 ```
 git clone -b test_small_set https://github.com/lirui-cyber/Language-Identification.git
 ```
-2. Point to your kaldi
-Open ```Language-Identification/path.sh``` file, change **KALDI_ROOT** to your kaldi directory
+2. Point to your kaldi <br>
+Open ```Language-Identification/path.sh``` file, change **KALDI_ROOT** to your kaldi directory,e.g.
+```
+KALDI_ROOT=/home/asrxiv/w2021/kaldi-cuda11
+```
 ## Data preparation
 The data folder contains:<br>
 - **Training set**: lre17_train [ lre17_train_all + lre17_dev_3s + lre17_dev_10s + lre17_dev_30s ]
