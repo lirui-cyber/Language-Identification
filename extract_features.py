@@ -128,6 +128,9 @@ def main():
                           if torch.cuda.is_available() else 'cpu')
     # get pretrained SLSR-53 model
     model_path = config_proj["Input"]["userroot"] + config_proj["wav2vec_info"]["model_path"]
+    if not os.path.exists(model_path):
+        print("pretrained model does not exists")
+        exit()
     model = hubconf.wav2vec2_local(ckpt=model_path)
     model.to(device)
 
