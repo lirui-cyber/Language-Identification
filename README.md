@@ -83,7 +83,7 @@ mv tool/expert.py tool/s3prl/s3prl/upstream/wav2vec2/
 
 ### Extracting wav2vec2 features
 ```
-python3 process_lre_data.py
+python3 extract_features.py
 ```
 ### Training 
 ```
