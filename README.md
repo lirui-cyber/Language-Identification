@@ -1,11 +1,15 @@
 # Transformer based Language Identification System
-## Download the project
-Clone the project from GitHub into your workspace
-```
-git clone -b test_small_set https://github.com/lirui-cyber/Language-Identification.git
-```
 ## Installation:
-1. sph2pipe
+1. Install Kaldi
+```bash
+git clone -b 5.4 https://github.com/kaldi-asr/kaldi.git kaldi
+cd kaldi/tools/; 
+# Run this next line to check for dependencies, and then install them
+extras/check_dependencies.sh
+make; cd ../src; ./configure; make depend; make
+```
+
+2. sph2pipe
 ```
 cd sph2pipe_v2.5
 gcc -o sph2pipe *.c -lm
@@ -15,6 +19,13 @@ vim ~/.bashrc
 export PATH=/home3/jicheng/sph2pipe_v2.5:$PATH
 source ~/.bashrc
 ```
+## Download the project
+1. Clone the project from GitHub into your workspace
+```
+git clone -b test_small_set https://github.com/lirui-cyber/Language-Identification.git
+```
+2. Point to your kaldi
+Open ```Language-Identification/path.sh``` file, change **KALDI_ROOT** to your kaldi directory
 ## Data preparation
 The data folder contains:<br>
 - **Training set**: lre17_train [ lre17_train_all + lre17_dev_3s + lre17_dev_10s + lre17_dev_30s ]
@@ -29,52 +40,10 @@ Original path: /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_201
 Your path: /data/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
 sed -i "s#/data/users/ellenrao/NIST_LRE_Corpus/#/data/#g" data/lre17_train/wav.scp
 ```
-### Processing training data
-It is to generate each segment as new 16kHz wavefile, which name is the same as the uttID(1st column) of utt2spk <br>
-```source-data``` is the folder where the audio is stored.
-```
-python generate_new_wav_cmd.py data/lre17_train/wav.scp data/lre17_train/segments source-data/lre17-16k/lre17_train
-```
-### Processing test data
-Because the test set does not hava segment, only upsampling is required
-```
-bash upsampling.sh  --save_16k_dir source-data/lre17-16k
-```
-### Prepare new kaldi format file
-New kaldi format file are stored in ```data-16k```, and it is better not to change this parameter.
-```
-bash prepare_new_kaldi_format.sh --save_16k_dir source-data/lre17-16k --data data-16k
-```
 
-## Add Noise
-In order to test the performance of the system under noisy background, all data sets are denoised.<br>
-Different channels of rats data set are used as noise, in which channel A,E,H is used as noise data of test set.
-
-At the same time, different SNR (5, 10, 15, 20) are used for noise addition.<br>
-The smaller the SNR, the greater the noise.<br>
-
-### Run add noise scripts
-Before running, please make sure you have changed the path of data/{rats_noise_channel_BCDFG,rats_noise_channel_AEH}/wav.scp to the path of your own rats data
+### Run data preparation script
 ```
-# for training data set
-
-cd Add-Noise
-
-bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_train --noise_dir ../data/rats_noise_channel_BCDFG
-
-# fot test set
-bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_3s --noise_dir ../data/rats_noise_channel_AEH
-bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_10s --noise_dir ../data/rats_noise_channel_AEH
-bash add-noise-for-lid.sh --steps 2 --src-train ../data-16k/lre17_eval_30s --noise_dir ../data/rats_noise_channel_AEH
-
-cd ..
-```
-After run "add-noise-for-lid.sh" script, Each folder generates four additional folders.<br>
-For lre_train, will generate lre_train_5_snrs、lre_train_10_snrs、lre_train_15_snrs、lre_train_20_snrs
-
-### Generate new wav file for noise data
-```
-bash generate_wav.sh  --save_16k_dir source-data/lre17-16k --data data-16k
+  bash prepare_data.sh --steps 1-2
 ```
 ## Training pipeline
 Before execution, please check the parameters in ```xsa_config``` <br>

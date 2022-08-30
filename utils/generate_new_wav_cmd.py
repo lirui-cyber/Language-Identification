@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-# write by Jicheng Zhang, for read model's log to write files for draw curve
+# write by LiRui, for read model's log to write files for draw curve
 
 import os
 import logging

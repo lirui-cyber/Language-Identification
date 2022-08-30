@@ -1,15 +1,10 @@
 
-MAIN_ROOT=/home3/jicheng/espnet
-KALDI_ROOT=$MAIN_ROOT/tools/kaldi
+KALDI_ROOT=/home/asrxiv/w2021/kaldi-cuda11
 
-# export CUDA_VISIBLE_DEVICES="5"
 export PATH=$PWD/utils/:$KALDI_ROOT/tools/openfst/bin:$PATH
 [ ! -f $KALDI_ROOT/tools/config/common_path.sh ] && echo >&2 "The standard file $KALDI_ROOT/tools/config/common_path.sh is not present -> Exit!" && exit 1
 . $KALDI_ROOT/tools/config/common_path.sh
 export LC_ALL=C
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$MAIN_ROOT/tools/chainer_ctc/ext/warp-ctc/build
-. "${MAIN_ROOT}"/tools/activate_python.sh && . "${MAIN_ROOT}"/tools/extra_path.sh
-export PATH=$MAIN_ROOT/utils:$MAIN_ROOT/espnet/bin:$PATH
 
 export OMP_NUM_THREADS=1
 
