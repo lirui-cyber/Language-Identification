@@ -57,6 +57,7 @@ eng-usg-en-6507-a sph2pipe -f wav -p /data/users/ellenrao/NIST_LRE_Corpus/NIST_L
 eng-usg-en-6900-a sph2pipe -f wav -p /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/eng-usg/en_6900-a.sph |
 eng-usg-en-6956-b sph2pipe -f wav -p /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/eng-usg/en_6956-b.sph |
 eng-usg-lre17_ahmvryni sph2pipe -f wav -p /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E23_2017_NIST_Language_Recognition_Evaluation_Development_Data/data/dev/lre17_ahmvryni.sph |
+por-brz-zzxqv sph2pipe -f wav -p /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/por-brz/zzxqv.sph |
 qsl-pol-20110215-205526-944-a sph2pipe -f wav -p /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/qsl-pol/20110215_205526_944-a.sph |
 qsl-pol-20110307-143806-1376-a sph2pipe -f wav -p /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/qsl-pol/20110307_143806_1376-a.sph |
 qsl-rus-20060525-173049-8569-b sph2pipe -f wav -p /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/qsl-rus/20060525_173049_8569-b.sph |
