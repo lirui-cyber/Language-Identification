@@ -39,9 +39,13 @@ You can use the ```sed``` command to replace the path in the wav.scp file with y
 You only need to change the path of lre17_train, lre17_eval_3s, lre17_eval_10s, lre17_eval_30s to LRE data and rats_noise_channel_AEH, rats_noise_channel_BCDFG to RATS data
 ```
 egs:
-Original path: /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
+Original LRE data path: /data/users/ellenrao/NIST_LRE_Corpus/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
 Your path: /data/NIST_LRE_2017/LDC2017E22_2017_NIST_Language_Recognition_Evaluation_Training_Data/data/ara-acm/124688.000272.5000.pcm.feather.sph
 sed -i "s#/data/users/ellenrao/NIST_LRE_Corpus/#/data/#g" data/lre17_train/wav.scp
+
+Original Rats data path:/home3/andrew219/python_scripts/extract_rats_noise/rats_channels/channel_A/10002_20705_alv_A.wav
+Your path: /data/rats_channels/channel_A/10002_20705_alv_A.wav
+sed -i "s#/home3/andrew219/python_scripts/extract_rats_noise/#/data/#g" data/rats_noise_channel_AEH/wav.scp
 ```
 
 ### Run data preparation script
