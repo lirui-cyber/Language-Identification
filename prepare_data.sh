@@ -14,7 +14,9 @@ echo
 exp=data-16k
 dump=source-data/lre17-16k
 steps=2
+
 . utils/parse_options.sh || exit 1
+. path.sh
 
 steps=$(echo $steps | perl -e '$steps=<STDIN>;  $has_format = 0;
   if($steps =~ m:(\d+)\-$:g){$start = $1; $end = $start + 10; $has_format ++;}
