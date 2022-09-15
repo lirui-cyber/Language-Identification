@@ -71,76 +71,16 @@ class RawFeatures2(data.Dataset):
     def __len__(self):
         return len(self.label_list)
 
-class RawFeaturesCurriculumLearning(data.Dataset):
-    # 更改比例
-    def __init__(self, txt_path, train_feats, scale):
-        print(txt_path)
-        print(train_feats)
-        with open(train_feats, 'r') as f:
-            lines = f.readlines()
-        # 通过uttName来存储特征
-        self.feat_dict = {}
-        for line in lines:
-            temp = line.split()
-            self.feat_dict[temp[0]] = temp[1].replace('\n', '')
-            
-        # 做一下数据的选择
-        with open(txt_path, 'r') as f:
-            lines = f.readlines()
-        length = len(lines)
-        # 将整个数组乱序
-        random.shuffle(lines)
-        # feature_list就是name
-        self.feature_list = [i.split()[0] for i in lines]
-        # label_list就是label标签
-        self.label_list = [i.split()[1] for i in lines]
-        # 特征的长度
-        self.seq_len_list = [i.split()[2].strip() for i in lines]
-        
-        l = int(len(self.label_list)/5)
-        if len(scale) != 5:
-            print("Error, the number of data set not equal to 5")
-        else:
-            arr = []
-            for i in scale:
-                arr.append(int(i * l))
-            temp_feature_list = []
-            temp_label_list = []
-            temp_seq_len_list = []
-            number = [0, 0, 0, 0, 0]
-            tail_symbol = ["_clean", "_20_snrs", "_15_snrs", "_10_snrs", "_5_snrs"]
-            for i in range(length):
-                flag = 0
-                for j in range(1, len(tail_symbol)):
-                    if self.feature_list[i].endswith(tail_symbol[j]):
-                        if arr[j] > number[j]:
-                            temp_feature_list.append(self.feature_list[i])
-                            temp_label_list.append(self.label_list[i])
-                            temp_seq_len_list.append(self.seq_len_list[i])
-                            number[j] += 1
-                        flag = 1
-                        break
-                # 代表着clean的数据集
-                if flag == 0:
-                    # print(self.feature_list[i])
-                    if arr[0] > number[0]:
-                        temp_feature_list.append(self.feature_list[i])
-                        temp_label_list.append(self.label_list[i])
-                        temp_seq_len_list.append(self.seq_len_list[i])
-                        number[0] += 1
-                flag = 0
-            self.feature_list = temp_feature_list
-            self.label_list = temp_label_list
-            self.seq_len_list = temp_seq_len_list
-            print(number)
-            print(arr)
+class RawFeatures3(data.Dataset):
+    def __init__(self,uttid, wav_path,labels):
+        self.uttid_list = uttid
+        self.wavpath_list = wav_path
+        self.label_list = labels
     def __getitem__(self, index):
-        # feature_path = self.feature_list[index]
-        feature_path = self.feat_dict[self.feature_list[index]]
-        feature = torch.from_numpy(kaldiio.load_mat(feature_path))
+        wav, sr = librosa.load(self.wavpath_list[index], sr=None)
+        id = self.uttid_list[index]
         label = int(self.label_list[index])
-        seq_len = int(self.seq_len_list[index])
-        return feature, label, seq_len
+        return id, label, wav
 
     def __len__(self):
         return len(self.label_list)
