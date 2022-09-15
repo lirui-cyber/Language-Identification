@@ -5,6 +5,7 @@ import torch.utils.data as data
 import torch.nn.utils.rnn as rnn_utils
 import kaldiio
 import warnings
+import librosa
 warnings.filterwarnings("ignore")
 def collate_fn(batch):
     batch.sort(key=lambda x: len(x[1]), reverse=True)
