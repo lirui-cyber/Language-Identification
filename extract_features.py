@@ -100,8 +100,8 @@ def main():
     feat_extract(trainloader, model, device, feat_layer, save_w2v_train_dir,train_txt)
     test_sets = config_proj["Input"]["test_sets"].split()
     for test in test_sets:
-        wav_scp_test = config_proj["Input"]["userroot"] + config_proj["data"]  + test + "/wav.scp"
-        utt2lang_test = config_proj["Input"]["userroot"] + config_proj["data"]  + test + "/utt2lang"
+        wav_scp_test = config_proj["Input"]["userroot"] + test + "/wav.scp"
+        utt2lang_test = config_proj["Input"]["userroot"] + test + "/utt2lang"
         testloader = prepare_data(wav_scp_test, utt2lang_test)
         save_w2v_test_dir = wav_scp_test.replace('/wav.scp', "/wav2vec_" + config_proj["wav2vec_info"]["model_name"] + "_" + str(feat_layer) + "_layer")
         if not os.path.exists(save_w2v_test_dir):
