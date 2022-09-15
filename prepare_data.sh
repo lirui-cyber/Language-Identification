@@ -15,7 +15,7 @@ exp=data-16k
 dump=source-data/lre17-16k
 steps=2
 . utils/parse_options.sh || exit 1
-
+. path.sh || exit 1
 steps=$(echo $steps | perl -e '$steps=<STDIN>;  $has_format = 0;
   if($steps =~ m:(\d+)\-$:g){$start = $1; $end = $start + 10; $has_format ++;}
         elsif($steps =~ m:(\d+)\-(\d+):g) { $start = $1; $end = $2; if($start == $end){}elsif($start < $end){ $end = $2 +1;}else{die;} $has_format ++; }  
