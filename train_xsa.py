@@ -38,7 +38,6 @@ def validation(valid_txt, valid_feats, model, model_name, device, kaldi, log_dir
     acc = correct / total
     print('Current Acc.: {:.4f} %'.format(100 * acc))
     scores = scores.squeeze().cpu().numpy()
-    print(scores.shape)
     trial_txt = log_dir + '/trial_{}.txt'.format(model_name)
     score_txt = log_dir + '/score_{}.txt'.format(model_name)
     output_txt = log_dir + '/output_{}.txt'.format(model_name)
