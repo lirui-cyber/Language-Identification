@@ -106,7 +106,7 @@ def main():
         save_w2v_test_dir = wav_scp_test.replace('/wav.scp', "/wav2vec_" + config_proj["wav2vec_info"]["model_name"] + "_" + str(feat_layer) + "_layer")
         if not os.path.exists(save_w2v_test_dir):
             os.mkdir(save_w2v_test_dir)
-        test_txt = config_proj["Input"]["userroot"] + config_proj["data"] + test + "/wav2vec_" + config_proj["wav2vec_info"]["model_name"] + ".txt"
+        test_txt = config_proj["Input"]["userroot"] + test + "/wav2vec_" + config_proj["wav2vec_info"]["model_name"] + ".txt"
         feat_extract(testloader, model, device,feat_layer,save_w2v_test_dir,test_txt)
 
 
