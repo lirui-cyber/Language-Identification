@@ -22,7 +22,7 @@ for x in lre17_train;do
     for y in 5 10 15 20;do
         path=${save_dir}/${x}_${y}_snrs/
         snrs=_${y}_snrs
-        rm ${data}/${x}_${y}_snrs/{spk2utt,utt2uniq,wav.scp}
+        rm ${data}/${x}_${y}_snrs/{spk2utt,wav.scp}
         cat ${data}/${x}_${y}_snrs/utt2lang | awk -v p=$path -v s=${snrs} '{l=length($1);name=substr($1,7,l);print name s" " p $1".wav"}' > ${data}/${x}_${y}_snrs/wav.scp
         cat ${data}/${x}_${y}_snrs/utt2lang | awk -v p=$path -v s=${snrs} '{l=length($1);name=substr($1,7,l);print name s" " $2}' > ${data}/${x}_${y}_snrs/utt2spk
         cp ${data}/${x}_${y}_snrs/utt2spk ${data}/${x}_${y}_snrs/utt2lang
