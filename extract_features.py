@@ -63,7 +63,7 @@ def feat_extract(dataloader, model, device, feat_layer, save_dir,wav2lang):
                 wav = torch.tensor(wav).to(device=device, dtype=torch.float)
                 features = model(wav)["hidden_state_{}".format(feat_layer)]
                 features_ = features.squeeze(0).cpu().detach().numpy()
-                print("uttid:{} extracted feature".format(uttid[0]))
+                
                 new_feat = fmake_200ms_feat(features_, overlap=0, chunk_len=20)
 
                 iid = uttid[0]
